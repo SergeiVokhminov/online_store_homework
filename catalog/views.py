@@ -1,13 +1,13 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'catalog/home.html')
+    return render(request, "catalog/home.html")
 
 
 def catalog(request):
-    return render(request, 'catalog/catalog.html')
+    return render(request, "catalog/catalog.html")
 
 
 def contacts(request):
@@ -16,8 +16,10 @@ def contacts(request):
         phone = request.POST.get("phone")
         message = request.POST.get("message")
 
-        return HttpResponse(f"""</div> Добрый день, {name}! Ваш номер: {phone}<div>
+        return HttpResponse(
+            f"""</div> Добрый день, {name}! Ваш номер: {phone}<div>
                                 <div> Ваше сообщение: {message} <div>
-                                <div> Ваши данные были успешно отправлены!</div>""")
+                                <div> Ваши данные были успешно отправлены!</div>"""
+        )
 
     return render(request, "catalog/contacts.html")
