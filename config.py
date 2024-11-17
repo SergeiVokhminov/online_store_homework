@@ -8,10 +8,10 @@ from configparser import ConfigParser
 ROOT_DIR = os.path.dirname(__file__)
 
 #  Путь до готового файла css
-PATH_TO_FILE = os.path.join(ROOT_DIR, "static", "css")
+PATH_TO_FILE_css = os.path.join(ROOT_DIR, "static", "css")
 
 #  ППуть до готового файла js
-NEW_PATH_TO_FILE = os.path.join(ROOT_DIR, "static", "js")
+PATH_TO_FILE_js = os.path.join(ROOT_DIR, "static", "js")
 
 
 #  Настройки для логгера
@@ -48,8 +48,8 @@ def setup_logger(name: str, log_file: str) -> logging.Logger:
 if __name__ == "__main__":
     print(ROOT_DIR)
     print()
-    print(PATH_TO_FILE)
+    print(PATH_TO_FILE_css)
     print()
-    print(NEW_PATH_TO_FILE)
+    print(PATH_TO_FILE_js)
     print()
     # print(config())
