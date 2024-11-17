@@ -43,3 +43,7 @@ def entrance(request):
 
 def registration(request):
     return render(request, "catalog/registration.html")
+
+
+def add_product(request):
+    return render(request, "catalog/product_add.html")
