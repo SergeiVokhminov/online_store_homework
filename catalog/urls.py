@@ -11,5 +11,5 @@ urlpatterns = [
     path("contacts/", contacts, name="contacts"),
     path("entrance/", entrance, name="entrance"),
     path("registration/", registration, name="registration"),
-    path("product/<int:pk>/", product_info, name="product")
+    path("product/<int:pk>/", product_info, name="product"),
 ]

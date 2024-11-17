@@ -18,7 +18,7 @@ def catalog(request):
 
 def product_info(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    context = {'product': product}
+    context = {"product": product}
     return render(request, "catalog/product_info.html", context)
 
 
@@ -35,6 +35,7 @@ def contacts(request):
         )
 
     return render(request, "catalog/contacts.html")
+
 
 def entrance(request):
     return render(request, "catalog/entrance.html")
