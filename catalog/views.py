@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView, TemplateView
@@ -54,8 +53,9 @@ class ContactsView(TemplateView):
                                 <div> Ваши данные были успешно отправлены!</div>"""
         )
 
-def entrance(request):
-    return render(request, "catalog/entrance.html")
+class EntranceView(TemplateView):
+    template_name = "catalog/entrance.html"
 
-def registration(request):
-    return render(request, "catalog/registration.html")
+
+class RegistrationView(TemplateView):
+    template_name = "catalog/registration.html"

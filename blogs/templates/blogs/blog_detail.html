@@ -1,21 +1,25 @@
 {% extends 'blogs/base.html' %}
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}Читать блог{% endblock %}
 {% block content %}
-
-<h1 class="mt-5 text-center">{{ object.title }}</h1>
-<div class="col-1"></div>
-<div class="col-10">
-    <div class="mt-5 card-body text-start">
-    {% if object.image %}
-    <img class="rounded float-start img-fluid" width="30%" height="200" src="{{ object.image.url }}">
-    {% endif %}
-        <p class="card-text">Автор: {{ object.blog_text }}</p>
-    <p>Дата публикации: {{ object.created_at|date:"d M Y" }}</p>
-    <p>Количество книг: {{ autor_books_count }}</p>
+<!--<div class="album py-5 bg-body-tertiary">-->
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">{{ object.title | upper }}</p>
+                        <p class="card-text">Дата добавления: {{ object.created_at }}</p>
+                        <p class="card-text">{{ object.article }}</p>
+                        <p class="card-text">Количество просмотров {{ object.view }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{% url 'blogs:blog_list' %}" role="button">Назад</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    <div class="mt-5">
-    <a href="{% url 'blog:blog_update' object.pk %}" class="btn btn-secondary">Редактировать</a>
-    <a href="{% url 'blog:blog_delete' object.pk %}" class="btn btn-danger">Удалить</a>
-    <a href="{% url 'blog:blog_list' %}" class="btn btn-light border-primary text-primary">Назад</a></div>
+    </div>
 </div>
 {% endblock %}

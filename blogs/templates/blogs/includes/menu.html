@@ -2,15 +2,18 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
-                <h4>Blog</h4>
-                <p class="text-body-secondary">Blog</p>
+                <h4>MyOnlineStoreBlog</h4>
+                <p class="text-body-secondary">Отличное место почитать!</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
                 <h4>Навигация</h4>
                 <ul class="list-unstyled">
-                    <li><a href="{% url 'blogs:blog_list' %}" class="text-white">Главная</a></li>
-                    <li><a href="#" class="text-white">Вход</a></li>
-                    <li><a href="#" class="text-white">Регистрация</a></li>
+                    <li><a href="{% url 'catalog:home' %}" class="text-white">Главная</a></li>
+                    <li><a href="{% url 'blogs:blog_list' %}" class="text-white">Мои блоги</a></li>
+                    <li><a href="{% url 'blogs:blog_create' %}" class="text-white">Добавить блог</a></li>
+                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
+                    <li><a href="{% url 'catalog:entrance' %}" class="text-white">Вход</a></li>
+                    <li><a href="{% url 'catalog:registration' %}" class="text-white">Регистрация</a></li>
                 </ul>
             </div>
         </div>
