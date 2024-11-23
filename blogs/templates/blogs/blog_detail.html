@@ -10,7 +10,7 @@
                         <p class="card-text">{{ object.title | upper }}</p>
                         <p class="card-text">Дата добавления: {{ object.created_at }}</p>
                         <p class="card-text">{{ object.article }}</p>
-                        <p class="card-text">Количество просмотров {{ object.view }}</p>
+                        <p class="card-text">Количество просмотров: {{ object.views }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'blogs:blog_list' %}" role="button">Назад</a>
