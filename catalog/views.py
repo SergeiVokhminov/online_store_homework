@@ -1,29 +1,48 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, TemplateView
 
 from catalog.models import Category, Product
 
 
-def home(request):
-    products = Product.objects.all()
-    context = {"products": products}
-    return render(request, "catalog/home.html", context)
+class HomeView(TemplateView):
+    template_name = "catalog/home.html"
 
 
-def catalog(request):
-    categories = Category.objects.all()
-    context = {"category": categories}
-    return render(request, "catalog/catalog.html", context)
+class ProductListView(ListView):
+    model = Product
 
 
-def product_info(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, "catalog/product_info.html", context)
+class ProductDetailView(DetailView):
+    model = Product
 
 
-def contacts(request):
-    if request.method == "POST":
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ["name", "description", "image", "category", "price"]
+    success_url = reverse_lazy("catalog: product_list")
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ["name", "description", "image", "category", "price"]
+    success_url = reverse_lazy("catalog: product_list")
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy("catalog: product_list")
+
+
+class CategoryListView(ListView):
+    model = Category
+
+
+class ContactsView(TemplateView):
+    template_name = "catalog/contacts.html"
+
+    def post(self, request, *args, **kwargs):
         name = request.POST.get("name")
         phone = request.POST.get("phone")
         message = request.POST.get("message")
@@ -34,16 +53,9 @@ def contacts(request):
                                 <div> Ваши данные были успешно отправлены!</div>"""
         )
 
-    return render(request, "catalog/contacts.html")
+class EntranceView(TemplateView):
+    template_name = "catalog/entrance.html"
 
 
-def entrance(request):
-    return render(request, "catalog/entrance.html")
-
-
-def registration(request):
-    return render(request, "catalog/registration.html")
-
-
-def add_product(request):
-    return render(request, "catalog/product_add.html")
+class RegistrationView(TemplateView):
+    template_name = "catalog/registration.html"
