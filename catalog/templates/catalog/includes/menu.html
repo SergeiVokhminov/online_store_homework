@@ -10,11 +10,18 @@
                 <ul class="list-unstyled">
                     <li><a href="{% url 'catalog:home' %}" class="text-white">Главная</a></li>
                     <li><a href="{% url 'catalog:product_list' %}" class="text-white">Список товаров</a></li>
-                    <li><a href="{% url 'catalog:category_list' %}" class="text-white">Категории</a></li>
-                    <li><a href="{% url 'catalog:product_create' %}" class="text-white">Добавить товар</a></li>
+<!--                    <li><a href="{% url 'catalog:category_list' %}" class="text-white">Категории</a></li>-->
+<!--                    <li><a href="{% url 'catalog:product_create' %}" class="text-white">Добавить товар</a></li>-->
                     <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
-                    <li><a href="{% url 'catalog:entrance' %}" class="text-white">Вход</a></li>
-                    <li><a href="{% url 'catalog:registration' %}" class="text-white">Регистрация</a></li>
+                    {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'users:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-link">Выход</button>
+                    </form>
+                    {% else %}
+                    <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>
+                    <li><a href="{% url 'users:register' %}" class="text-white">Регистрация</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

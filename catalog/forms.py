@@ -2,6 +2,9 @@ from django import forms
 from catalog.models import Product
 from django.core.exceptions import ValidationError
 
+forbidden_words = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "дёшево", "бесплатно", "обман",
+                   "полиция", "радар"]
+
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -17,16 +20,12 @@ class ProductForm(forms.ModelForm):
         self.fields['price'].widget.attrs.update({'class': 'form-control'})
 
     def clean_name(self):
-        forbidden_words = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "дёшево", "бесплатно", "обман",
-                           "полиция", "радар"]
         name = self.cleaned_data.get("name")
         if name.lower() in forbidden_words:
             raise ValidationError("Название содержит запрещенное слово")
         return name
 
     def clean_description(self):
-        forbidden_words = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "дёшево", "бесплатно", "обман",
-                           "полиция", "радар"]
         description = self.cleaned_data.get("description")
         for word in forbidden_words:
             if word in description.lower():
