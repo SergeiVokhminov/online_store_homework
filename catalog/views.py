@@ -20,6 +20,12 @@ class ProductListView(ListView):
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.views += 1
+        self.object.save()
+        return self.object
+
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
@@ -41,6 +47,11 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     # fields = ["name", "description", "image", "category", "price"]
     success_url = reverse_lazy("catalog:product_list")
 
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        if self.request.user != product.owner:
+            return HttpResponseForbidden("У вас нет прав на это действие.")
+
     def get_success_url(self):
         return reverse("catalog:product", args=[self.kwargs.get("pk")])
 
@@ -49,6 +60,14 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     model = Product
     success_url = reverse_lazy("catalog:product_list")
     permission_required = 'catalog.delete_product'
+
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        if (
+            not self.request.user.has_perm("delete_product")
+            or self.request.user != product.owner
+        ):
+            return HttpResponseForbidden("У вас нет прав на это действие.")
 
 
 class UnpublishProductView(LoginRequiredMixin, View):
