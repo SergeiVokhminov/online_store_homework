@@ -4,7 +4,7 @@
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
             <div class="col">
                 <div class="card shadow-sm">
                     <img src="{{ product.image | media_filter }}">
@@ -24,7 +24,7 @@
                                 {% if perms.catalog.can_unpublish_product and product.is_published %}
                                 <form action="{% url 'catalog:unpublish_product' product.pk %}" method="post">
                                     {% csrf_token %}
-                                    <button class="btn btn-secondary" type="submit">Снять с публикации</button>
+                                    <button class="btn btn-primary" type="submit">Снять с публикации</button>
                                 </form>
                                 {% endif %}
                                 {% if perms.catalog.delete_product or user == product.owner %}
