@@ -55,7 +55,6 @@ class UnpublishProductView(LoginRequiredMixin, View):
 
     def post(self, request, pk):
         product = get_object_or_404(Product, id=pk)
-
         if not request.user.has_perm('catalog.can_unpublish_product'):
             return HttpResponseForbidden("У вас недостаточно прав для снятия продукта с публикации")
 
@@ -67,6 +66,7 @@ class UnpublishProductView(LoginRequiredMixin, View):
 
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
+    template_name = "catalog/category_list.html"
 
 
 class ContactsView(TemplateView):
