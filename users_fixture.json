@@ -1,0 +1,106 @@
+[
+{
+    "model": "users.user",
+    "pk": 23,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$dtjNj2x6dZySqfMrMIZ7g9$OyQAQ09PZpteLIjdwJCjH3Hkx8WpIskJhCKFotrfiLU=",
+        "last_login": "2024-12-17T20:11:07.373Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-12-17T16:32:24Z",
+        "email": "admin@list.ru",
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 24,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$Wtr2wViPESgQdN9tuPfCIK$wb/I2lbWom6Vp5hWusslQ5nyUriVrgK6J0yvYuKHsog=",
+        "last_login": "2024-12-17T19:51:53.500Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T18:31:21.704Z",
+        "email": "user_1@mail.com",
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 25,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$VnH774U1QEld1w558c8sQ7$3Y+/Mz7OFSNEJ+qJT8UmvVnvcH663hytHZeYOPN6DOg=",
+        "last_login": "2024-12-17T19:44:45.595Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T18:46:42Z",
+        "email": "sv.vokhminov@yandex.ru",
+        "avatar": "photo/avatars/the_flash.jpg",
+        "phone_number": null,
+        "country": "USA",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 26,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$jCmUDOrptnmtl3vf3i3xnh$puS3zuPKf4msxuoAt6qDt7TGHJzXiJNpyIigbScrPMI=",
+        "last_login": "2024-12-17T19:29:38.490Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T19:29:11.479Z",
+        "email": "user_2@mail.ru",
+        "avatar": "",
+        "phone_number": "1234",
+        "country": "qwe",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 27,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$gH42TNg6vvxw6z4XsSwN3k$KldKQBmDai0U5bIAZSHfubCu0JnRQYjYPxFv4crLXNo=",
+        "last_login": "2024-12-17T20:07:46.434Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T20:07:04.211Z",
+        "email": "test@list.ru",
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

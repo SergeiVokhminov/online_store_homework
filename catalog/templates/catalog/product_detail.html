@@ -4,7 +4,7 @@
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
             <div class="col">
                 <div class="card shadow-sm">
                     <img src="{{ product.image | media_filter }}">
@@ -18,6 +18,18 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'catalog:product_list' %}" role="button">Назад</a>
+                                {% if user == product.owner %}
+                                <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
+                                {% endif %}
+                                {% if perms.catalog.can_unpublish_product and product.is_published %}
+                                <form action="{% url 'catalog:unpublish_product' product.pk %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary" type="submit">Снять с публикации</button>
+                                </form>
+                                {% endif %}
+                                {% if perms.catalog.delete_product or user == product.owner %}
+                                <a class="btn btn-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

@@ -10,10 +10,11 @@
                 <ul class="list-unstyled">
                     <li><a href="{% url 'catalog:home' %}" class="text-white">Главная</a></li>
                     <li><a href="{% url 'catalog:product_list' %}" class="text-white">Список товаров</a></li>
-<!--                    <li><a href="{% url 'catalog:category_list' %}" class="text-white">Категории</a></li>-->
-<!--                    <li><a href="{% url 'catalog:product_create' %}" class="text-white">Добавить товар</a></li>-->
-                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
                     {% if user.is_authenticated %}
+                    <li><a href="{% url 'catalog:category_list' %}" class="text-white">Категории</a></li>
+                    <li><a href="{% url 'blogs:blog_list' %}" class="text-white">Список блогов</a></li>
+                    <li><a href="{% url 'catalog:product_create' %}" class="text-white">Добавить товар</a></li>
+                    <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
                     <form method="post" action="{% url 'users:logout' %}">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-link nav-link">Выход</button>
