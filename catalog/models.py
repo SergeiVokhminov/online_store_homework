@@ -34,13 +34,15 @@ class Product(models.Model):
         "Category",
         on_delete=models.SET_NULL,
         verbose_name="Категория",
-        help_text="Введите категорию",
+        help_text="Выберите категорию",
         related_name="products",
         blank=True,
         null=True,
     )
     price = models.FloatField(verbose_name="Цена товара", help_text="Введите цену товара")
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(
+        default=False, verbose_name="Признак публикации", help_text="Укажите статус публикации товара",
+    )
     owner = models.ForeignKey(
         User,
         verbose_name="Владелец",

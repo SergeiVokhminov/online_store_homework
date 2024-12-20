@@ -1,12 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseForbidden
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView, TemplateView, View
 
 from catalog.forms import ProductForm
 from catalog.models import Category, Product
+from catalog.services import get_products_list
 
 
 class HomeView(TemplateView):
@@ -16,7 +20,15 @@ class HomeView(TemplateView):
 class ProductListView(ListView):
     model = Product
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = cache.get('products_queryset')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('products_queryset', queryset, 60 * 15)
+        return queryset
 
+
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
@@ -44,6 +56,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
+    template_name = "catalog/product_form.html"
     # fields = ["name", "description", "image", "category", "price"]
     success_url = reverse_lazy("catalog:product_list")
 
@@ -58,6 +71,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
 class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
+    template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:product_list")
     permission_required = 'catalog.delete_product'
 
@@ -67,7 +81,7 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
             not self.request.user.has_perm("delete_product")
             or self.request.user != product.owner
         ):
-            return HttpResponseForbidden("У вас нет прав на это действие.")
+            return HttpResponseForbidden("У вас нет прав на это действие!")
 
 
 class UnpublishProductView(LoginRequiredMixin, View):
@@ -75,7 +89,7 @@ class UnpublishProductView(LoginRequiredMixin, View):
     def post(self, request, pk):
         product = get_object_or_404(Product, id=pk)
         if not request.user.has_perm('catalog.can_unpublish_product'):
-            return HttpResponseForbidden("У вас недостаточно прав для снятия продукта с публикации")
+            return HttpResponseForbidden("У вас недостаточно прав для снятия продукта с публикации!")
 
         product.is_published = False
         product.save()
@@ -87,6 +101,16 @@ class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "catalog/category_list.html"
 
+
+class ProductCategoryListView(ListView):
+    model = Category
+    template_name = 'catalog/products_list_by_category.html'
+    context_object_name = 'category'
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = get_products_list(self.kwargs.get('pk'))
+
+        return queryset
 
 class ContactsView(TemplateView):
     template_name = "catalog/contacts.html"
@@ -101,10 +125,3 @@ class ContactsView(TemplateView):
                                 <div> Ваше сообщение: {message} <div>
                                 <div> Ваши данные были успешно отправлены!</div>"""
         )
-
-class EntranceView(TemplateView):
-    template_name = "catalog/entrance.html"
-
-
-class RegistrationView(TemplateView):
-    template_name = "catalog/registration.html"
