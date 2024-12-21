@@ -10,7 +10,7 @@ from django.views.generic import ListView, DetailView, TemplateView, View
 
 from catalog.forms import ProductForm
 from catalog.models import Category, Product
-from catalog.services import get_products_list
+from catalog.services import get_products_list_by_category
 
 
 class HomeView(TemplateView):
@@ -19,6 +19,8 @@ class HomeView(TemplateView):
 
 class ProductListView(ListView):
     model = Product
+    context_object_name = "products"
+    template_name = "catalog/product_list.html"
 
     def get_queryset(self, *args, **kwargs):
         queryset = cache.get('products_queryset')
@@ -31,6 +33,7 @@ class ProductListView(ListView):
 @method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+    template_name = "catalog/product_detail.html"
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
@@ -42,6 +45,7 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
+    template_name = "catalog/product_form.html"
     # fields = ["name", "description", "image", "category", "price"]
     success_url = reverse_lazy("catalog:product_list")
 
@@ -60,13 +64,15 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     # fields = ["name", "description", "image", "category", "price"]
     success_url = reverse_lazy("catalog:product_list")
 
-    def post(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
-        if self.request.user != product.owner:
-            return HttpResponseForbidden("У вас нет прав на это действие.")
+    def post(self, request, *args, **kwargs):
+        product = self.get_object()
+        if request.user != product.owner:
+            return HttpResponseForbidden("У вас нет прав для редактирования продукта.")
+
+        # return super().post(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse("catalog:product", args=[self.kwargs.get("pk")])
+        return reverse("catalog:product_detail", args=[self.kwargs.get("pk")])
 
 
 class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -75,40 +81,32 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     success_url = reverse_lazy("catalog:product_list")
     permission_required = 'catalog.delete_product'
 
-    def post(self, request, pk):
-        product = get_object_or_404(Product, pk=pk)
-        if (
-            not self.request.user.has_perm("delete_product")
-            or self.request.user != product.owner
-        ):
-            return HttpResponseForbidden("У вас нет прав на это действие!")
-
 
 class UnpublishProductView(LoginRequiredMixin, View):
-
     def post(self, request, pk):
-        product = get_object_or_404(Product, id=pk)
-        if not request.user.has_perm('catalog.can_unpublish_product'):
-            return HttpResponseForbidden("У вас недостаточно прав для снятия продукта с публикации!")
+        product = get_object_or_404(Product, pk=pk)
+        if not request.user.has_perm("can_unpublish_product"):
+            return HttpResponseForbidden("У вас недостаточно прав для снятия товара с публикации!")
 
         product.is_published = False
         product.save()
 
-        return redirect('catalog:product', pk=product.id)
+        return redirect('catalog:product_list')
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "catalog/category_list.html"
+    # context_object_name = "category"
 
 
 class ProductCategoryListView(ListView):
     model = Category
-    template_name = 'catalog/products_list_by_category.html'
-    context_object_name = 'category'
+    template_name = "catalog/category_product.html"
+    context_object_name = "category"
 
     def get_queryset(self, *args, **kwargs):
-        queryset = get_products_list(self.kwargs.get('pk'))
+        queryset = get_products_list_by_category(self.kwargs.get('pk'))
 
         return queryset
 
