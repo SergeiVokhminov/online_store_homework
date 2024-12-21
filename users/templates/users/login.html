@@ -1,4 +1,5 @@
 {% extends 'catalog/base.html' %}
+{% load my_tags %}
 {% block title %}Вход{% endblock %}
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
@@ -12,7 +13,7 @@
 <!--                        {{ form.non_field_errors }}-->
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-primary">Войти</button>
-                        <a class="btn btn-primary" href="{% url 'catalog:home' %}">Назад</a>
+                        <a class="btn btn-primary" href="{% url 'catalog:home' %}">Отмена</a>
                     </div>
                 </div>
             </form>
