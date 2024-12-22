@@ -7,18 +7,7 @@ from users.models import User
 class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["email", "password1", "password2"]
-
-    class Meta:
-        model = User
-        fields = [
-            "email",
-            "phone_number",
-            "avatar",
-            "country",
-            "password1",
-            "password2",
-        ]
+        fields = ["email", "phone_number", "avatar", "country", "password1", "password2"]
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)

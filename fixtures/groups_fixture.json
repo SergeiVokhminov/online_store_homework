@@ -1,0 +1,126 @@
+[
+{
+    "model": "users.user",
+    "pk": 23,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$dtjNj2x6dZySqfMrMIZ7g9$OyQAQ09PZpteLIjdwJCjH3Hkx8WpIskJhCKFotrfiLU=",
+        "last_login": "2024-12-17T21:08:49.809Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-12-17T16:32:24Z",
+        "email": "admin@list.ru",
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 24,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$Wtr2wViPESgQdN9tuPfCIK$wb/I2lbWom6Vp5hWusslQ5nyUriVrgK6J0yvYuKHsog=",
+        "last_login": "2024-12-17T21:06:37.529Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T18:31:21.704Z",
+        "email": "user_1@mail.com",
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 25,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$VnH774U1QEld1w558c8sQ7$3Y+/Mz7OFSNEJ+qJT8UmvVnvcH663hytHZeYOPN6DOg=",
+        "last_login": "2024-12-17T19:44:45.595Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T18:46:42Z",
+        "email": "sv.vokhminov@yandex.ru",
+        "avatar": "photo/avatars/the_flash.jpg",
+        "phone_number": null,
+        "country": "USA",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 26,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$jCmUDOrptnmtl3vf3i3xnh$puS3zuPKf4msxuoAt6qDt7TGHJzXiJNpyIigbScrPMI=",
+        "last_login": "2024-12-17T21:14:47.939Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T19:29:11.479Z",
+        "email": "user_2@mail.ru",
+        "avatar": "",
+        "phone_number": "1234",
+        "country": "qwe",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 27,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$gH42TNg6vvxw6z4XsSwN3k$KldKQBmDai0U5bIAZSHfubCu0JnRQYjYPxFv4crLXNo=",
+        "last_login": "2024-12-17T20:07:46.434Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-17T20:07:04.211Z",
+        "email": "test@list.ru",
+        "avatar": "",
+        "phone_number": null,
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 28,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$pAPakWdy3suD25ADXYXAaK$7pK9lasZ8wc/HKtDIF5baS0YEdYxCQJNILWVIEvf/2k=",
+        "last_login": "2024-12-18T16:10:27.811Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-12-18T16:04:37.210Z",
+        "email": "my_mail@list.ru",
+        "avatar": "photo/avatars/free-download-nike-logo-wallpaper-x-for-ipad-PIC-MCH030454.jpg",
+        "phone_number": "123456",
+        "country": "USA",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
