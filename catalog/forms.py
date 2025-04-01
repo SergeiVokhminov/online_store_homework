@@ -4,7 +4,16 @@ from django.core.exceptions import ValidationError
 from catalog.models import Product
 
 forbidden_words = [
-    "казино", "криптовалюта", "крипта", "биржа", "дешево", "дёшево", "бесплатно", "обман", "полиция", "радар"
+    "казино",
+    "криптовалюта",
+    "крипта",
+    "биржа",
+    "дешево",
+    "дёшево",
+    "бесплатно",
+    "обман",
+    "полиция",
+    "радар",
 ]
 
 
@@ -15,21 +24,17 @@ class ProductForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update(
-            {'class': 'form-control', "placeholder": "Введите название товара"}
+        self.fields["name"].widget.attrs.update({"class": "form-control", "placeholder": "Введите название товара"})
+        self.fields["description"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Введите описание товара"}
         )
-        self.fields['description'].widget.attrs.update(
-            {'class': 'form-control', "placeholder": "Введите описание товара"}
+        self.fields["image"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Загрузите изображение товара"}
         )
-        self.fields['image'].widget.attrs.update(
-            {'class': 'form-control', "placeholder": "Загрузите изображение товара"}
+        self.fields["category"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Выберите категорию товара"}
         )
-        self.fields['category'].widget.attrs.update(
-            {'class': 'form-control', "placeholder": "Выберите категорию товара"}
-        )
-        self.fields['price'].widget.attrs.update(
-            {'class': 'form-control', "placeholder": "Введите цену товара"}
-        )
+        self.fields["price"].widget.attrs.update({"class": "form-control", "placeholder": "Введите цену товара"})
 
     def clean_name(self):
         name = self.cleaned_data.get("name")

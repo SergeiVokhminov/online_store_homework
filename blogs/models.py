@@ -12,7 +12,7 @@ class Blog(models.Model):
         blank=True,
     )
     created_at = models.DateField(auto_now_add=True)
-    publication_sign = models.BooleanField(verbose_name="Признак публикации")
+    publication_sign = models.BooleanField(verbose_name="Признак публикации", default=True)
     views = models.IntegerField(verbose_name="Количество просмотров", default=0)
 
     def __str__(self):

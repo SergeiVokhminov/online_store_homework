@@ -41,15 +41,13 @@ class Product(models.Model):
     )
     price = models.FloatField(verbose_name="Цена товара", help_text="Введите цену товара")
     is_published = models.BooleanField(
-        default=False, verbose_name="Признак публикации", help_text="Укажите статус публикации товара",
+        default=False,
+        verbose_name="Признак публикации",
+        help_text="Укажите статус публикации товара",
     )
     owner = models.ForeignKey(
-        User,
-        verbose_name="Владелец",
-        related_name="products",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True)
+        User, verbose_name="Владелец", related_name="products", on_delete=models.CASCADE, blank=True, null=True
+    )
     created_at = models.DateField(verbose_name="Дата создания", auto_now_add=True, blank=True, null=True)
     updated_at = models.DateField(verbose_name="Дата последнего изменения", auto_now=True, blank=True, null=True)
     views = models.PositiveIntegerField(default=0, verbose_name="Количество просмотров")
@@ -61,4 +59,6 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name"]
-        permissions = [("can_unpublish_product", "Can unpublish product"),]
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+        ]

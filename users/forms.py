@@ -17,18 +17,12 @@ class UserRegisterForm(UserCreationForm):
         self.fields["phone_number"].widget.attrs.update(
             {"class": "form-control", "placeholder": "Введите номер телефона"}
         )
-        self.fields["avatar"].widget.attrs.update(
-            {"class": "form-control", "placeholder": "Загрузите Ваш аватар"}
-        )
+        self.fields["avatar"].widget.attrs.update({"class": "form-control", "placeholder": "Загрузите Ваш аватар"})
         self.fields["country"].widget.attrs.update(
             {"class": "form-control", "placeholder": "Укажите Вашу страну проживания"}
         )
-        self.fields["password1"].widget.attrs.update(
-            {"class": "form-control", "placeholder": "Введите пароль"}
-        )
-        self.fields["password2"].widget.attrs.update(
-            {"class": "form-control", "placeholder": "Введите пароль"}
-        )
+        self.fields["password1"].widget.attrs.update({"class": "form-control", "placeholder": "Введите пароль"})
+        self.fields["password2"].widget.attrs.update({"class": "form-control", "placeholder": "Введите пароль"})
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get("phone_number")

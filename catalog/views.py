@@ -23,14 +23,14 @@ class ProductListView(ListView):
     template_name = "catalog/product_list.html"
 
     def get_queryset(self, *args, **kwargs):
-        queryset = cache.get('products_queryset')
+        queryset = cache.get("products_queryset")
         if not queryset:
             queryset = super().get_queryset()
-            cache.set('products_queryset', queryset, 60 * 15)
+            cache.set("products_queryset", queryset, 60 * 15)
         return queryset
 
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/product_detail.html"
@@ -79,7 +79,7 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     model = Product
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:product_list")
-    permission_required = 'catalog.delete_product'
+    permission_required = "catalog.delete_product"
 
 
 class UnpublishProductView(LoginRequiredMixin, View):
@@ -91,7 +91,7 @@ class UnpublishProductView(LoginRequiredMixin, View):
         product.is_published = False
         product.save()
 
-        return redirect('catalog:product_list')
+        return redirect("catalog:product_list")
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
@@ -106,9 +106,10 @@ class ProductCategoryListView(ListView):
     context_object_name = "category"
 
     def get_queryset(self, *args, **kwargs):
-        queryset = get_products_list_by_category(self.kwargs.get('pk'))
+        queryset = get_products_list_by_category(self.kwargs.get("pk"))
 
         return queryset
+
 
 class ContactsView(TemplateView):
     template_name = "catalog/contacts.html"
